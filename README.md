@@ -50,3 +50,38 @@ Merge made by the 'ort' strategy.
  create mode 100644 README.md
 
 e adicionou os arquivos e commits que estavam no remoto
+---
+alterações feitas, agora vamos tentar subir o repositorio local com a branch repo_errado criada no local e sem está no remoto
+
+git pull origin main
+
+subi a main e ele deu um merge, agr quando tentei subir a repo_errado ele fez um pull request
+
+foi possível fazer tudo mas o github sugeriu que eu protegesse a branch e está dando um conflito entre os readmes
+nos comandos sugeridos ele pede para fazer um merge com a main
+
+ele pede os seguintes comandos
+
+Step 1: Clone the repository or update your local repository with the latest changes.
+
+git pull origin main
+
+Step 2: Switch to the head branch of the pull request.
+
+git checkout repo_errado
+
+Step 3: Merge the base branch into the head branch.
+
+git merge main
+
+Step 4: Fix the conflicts and commit the result.
+
+See Resolving a merge conflict using the command line for step-by-step instructions on resolving merge conflicts.
+
+> para fazer esse merge ele apagou os arquivos criados (codigos.js) que estava no repo_errado e destacou os conflitos nos readmes
+
+Step 5: Push the changes.
+
+git push -u origin repo_errado
+
+Dps fui no github e ele permitiu fazer o pull request
