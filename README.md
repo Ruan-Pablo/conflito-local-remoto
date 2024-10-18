@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Esse readme foi criado no repositorio local
 - repositorio local
 - sem conxeção
