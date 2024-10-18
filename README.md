@@ -1,87 +1,100 @@
-## Esse readme foi criado no repositorio local
-- repositorio local
-- sem conxeção
+# Anotações: Resolução de Conflito no Git
 
-Esse readme foi criado no repositorio local com a intenção de estudar a modificação que acontece quando:
-- o repositorio local se conecta com repositorio errado na nuvem
+Aproveitei um conflito que apareceu neste repositório para treinar a resolução de conflitos no GitHub.
 
-Criei uma branch repo_errado
+Utilizei **ChatGPT** e **GitHub Docs** como fontes de consulta durante o processo.
 
-fiz um commit so que foi para as duas branchs (main e repo_errado)
+Essa branch `repo_errado` foi criada na intenção de testar e salvar tudo.
 
-agr tenho que apagar os arquivos que estão na branch main e commitar
+## O Conflito
 
-assim os arquivos permaneceram na branch repo_errado e a main estará vazia
+O repositório local e o remoto foram inicializados de maneira completamente diferente:
 
-tentando fazer um pull do repositorio remoto me deparo com o seguinte:
+- **Repositório local**: Continha um arquivo `README` (com anotações sobre a situação) e um arquivo de código (apenas para teste).
+- **Repositório remoto**: Tinha apenas um `README` relacionado ao desafio que eu estava prestes a fazer.
 
+O conflito ocorreu porque ambos os repositórios possuíam um arquivo `README.md`, porém com conteúdos distintos.
+
+## Passos Seguidos para Resolver o Conflito
+
+### 1. Criação do Repositório Local
+
+O repositório local foi criado com o seguinte objetivo:
+
+- Estudar as modificações que ocorrem ao conectar um repositório local com um repositório remoto incorreto.
+
+Criei uma branch chamada `repo_errado` e cometi as alterações tanto na branch `main` quanto na branch `repo_errado`. Agora, era necessário remover os arquivos da `main` e manter o conteúdo na `repo_errado`, mantendo a `main` vazia.
+
+### 2. Tentativa de Fazer o Pull do Repositório Remoto
+
+Ao tentar fazer o pull do repositório remoto, me deparei com o seguinte erro:
+
+```bash
 git pull origin main
-remote: Enumerating objects: 3, done.
-remote: Counting objects: 100% (3/3), done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-Unpacking objects: 100% (3/3), 969 bytes | 96.00 KiB/s, done.
-From https://github.com/Ruan-Pablo/rank-heroi
- * branch            main       -> FETCH_HEAD
- * [new branch]      main       -> origin/main
+```
+
+Retorno:
+
+```bash
 fatal: refusing to merge unrelated histories
+```
 
-fazendo separadamente
-git fetch origin
-git pull origin main
+Para forçar o pull dos arquivos do repositório remoto, utilizei:
 
-ainda me retorna 
-From https://github.com/Ruan-Pablo/rank-heroi
- * branch            main       -> FETCH_HEAD
-fatal: refusing to merge unrelated histories
-
-Daí, para forçar o pull dos arquivos em nuvem
-
-`git pull origin main --allow-unrelated-histories`
-
-resultando em:
-
+```bash
 git pull origin main --allow-unrelated-histories
-From https://github.com/Ruan-Pablo/rank-heroi
- * branch            main       -> FETCH_HEAD
+```
+
+Resultado:
+
+```bash
 Merge made by the 'ort' strategy.
- README.md | 2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 README.md
+README.md | 2 ++
+1 file changed, 2 insertions(+)
+create mode 100644 README.md
+```
 
-e adicionou os arquivos e commits que estavam no remoto
+Os arquivos e commits do repositório remoto foram adicionados com sucesso.
+
 ---
-alterações feitas, agora vamos tentar subir o repositorio local com a branch repo_errado criada no local e sem está no remoto
 
-git pull origin main
+### 3. Trabalhando com a Branch `repo_errado`
 
-subi a main e ele deu um merge, agr quando tentei subir a repo_errado ele fez um pull request
+Após o merge da `main`, tentei subir a branch `repo_errado`. O Git sugeriu fazer um **pull request** devido ao conflito entre os `README.md` dos dois repositórios.
 
-foi possível fazer tudo mas o github sugeriu que eu protegesse a branch e está dando um conflito entre os readmes
-nos comandos sugeridos ele pede para fazer um merge com a main
+#### Comandos sugeridos pelo GitHub:
 
-ele pede os seguintes comandos
+1. Atualizar o repositório local com as últimas mudanças:
 
-Step 1: Clone the repository or update your local repository with the latest changes.
+    ```bash
+    git pull origin main
+    ```
 
-git pull origin main
+2. Mudar para a branch `repo_errado`:
 
-Step 2: Switch to the head branch of the pull request.
+    ```bash
+    git checkout repo_errado
+    ```
 
-git checkout repo_errado
+3. Fazer o merge da branch `main` na `repo_errado`:
 
-Step 3: Merge the base branch into the head branch.
+    ```bash
+    git merge main
+    ```
 
-git merge main
+4. Resolver os conflitos e commitar o resultado.
 
-Step 4: Fix the conflicts and commit the result.
+5. Subir as mudanças para o repositório remoto:
 
-See Resolving a merge conflict using the command line for step-by-step instructions on resolving merge conflicts.
+    ```bash
+    git push -u origin repo_errado
+    ```
 
-> para fazer esse merge ele apagou os arquivos criados (codigos.js) que estava no repo_errado e destacou os conflitos nos readmes
+Após realizar o merge e resolver os conflitos, foi possível fazer o **pull request** no GitHub.
 
-Step 5: Push the changes.
+---
 
-git push -u origin repo_errado
+Essas foram as anotações e passos seguidos para resolver o conflito que surgiu durante a tentativa de conectar os repositórios.
 
-Dps fui no github e ele permitiu fazer o pull request
+---
+
